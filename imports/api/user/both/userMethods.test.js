@@ -208,4 +208,18 @@ describe('User methods', () => {
             assert.ok(user.profile.defaultTagAdded)
         })
     })
+
+    it('user can update profile', () => {
+      return callWithPromise('updateProfile', {
+        userId: Meteor.userId()
+      }).then(data => {
+          let user = Meteor.users.findOne({
+              _id: Meteor.userId()
+          })
+
+          assert.ok(user)
+
+          assert.ok(user.profile.defaultTagAdded)
+      })
+  })
 })
